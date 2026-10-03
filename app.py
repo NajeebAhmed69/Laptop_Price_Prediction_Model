@@ -9,9 +9,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---------------------------------------------------------
-# 1. LOAD SERIALIZED ARTIFACTS
-# ---------------------------------------------------------
 @st.cache_resource
 def load_data_and_model():
     with open('df.pkl', 'rb') as f_df:
@@ -26,16 +23,10 @@ except FileNotFoundError:
     st.error("Missing model artifacts! Please run your training script first to generate 'df.pkl' and 'pipeline.pkl'.")
     st.stop()
 
-# ---------------------------------------------------------
-# 2. UI HEADER
-# ---------------------------------------------------------
 st.title("💻 Laptop Price Predictor Dashboard")
 st.markdown("Estimate retail market prices using your trained Scikit-Learn pipeline based on core hardware configurations.")
 st.divider()
 
-# ---------------------------------------------------------
-# 3. INTERACTIVE INPUT CONTROLS
-# ---------------------------------------------------------
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -79,9 +70,6 @@ with col3:
 
 st.divider()
 
-# ---------------------------------------------------------
-# 4. PREDICTION INFERENCE
-# ---------------------------------------------------------
 if st.button("🚀 Calculate Estimated Market Price", use_container_width=True):
     # Parse screen dimensions and compute PPI
     x_res, y_res = map(int, resolution.split('x'))
